@@ -26,10 +26,10 @@ def download(*args):
         t = i.replace('\\', '')#替换转义字符
         imgfilename = t.split("/")[-1].replace('_500','').replace('_r1','').replace('tumblr','%s'%args)#分割并修改保存的文件名
         print('At',time.ctime(),'Downloadiing %s from userID %s' % (imgfilename, args))
-        imgDir = "./etc/img"
+        imgDir = "./etc/img/"
         if not os.path.exists(imgDir):#判断路径是否存在
             os.makedirs(imgDir)
-        urllib.request.urlretrieve(t, "./etc/img/%s" % imgfilename)
+        urllib.request.urlretrieve(t, "%s%s" %(imgDir,imgfilename))
     print('图片已完成下载%s' %args)
 
     for v in re.findall(video,data):#视频下载
@@ -37,10 +37,10 @@ def download(*args):
         videofilename = d.split("/")[-1]
         videofilename += '.mp4'
         print('At',time.ctime(),'Downloadiing %s from %s' % (videofilename, args))
-        videoDir = "./etc/mp4"
+        videoDir = "./etc/mp4/"
         if not os.path.exists(videoDir):
             os.makedirs(videoDir)
-        urllib.request.urlretrieve(d, "./etc/mp4/%s" % videofilename)
+        urllib.request.urlretrieve(d, "%s%s" %(videoDir,videofilename))
         print('视频已完成下载%s' % args)
 
 def tumblr_id(*args):
