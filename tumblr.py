@@ -1,4 +1,4 @@
-﻿# -*- coding:utf-8 -*-
+# -*- coding:utf-8 -*-
 import time, re, os, urllib.request,sys
 from threading import Lock, current_thread, Thread
 
@@ -8,8 +8,7 @@ def main():
         username.append(sys.argv[i])
         print(' '.join(username))
     tumblr_id(username)
-def download(*args):
-    args = ''.join(args) #拼接字符串
+def download(args):
     print('At',time.ctime(),'开始下载%s'%args)
     url = 'http://%s.tumblr.com/api/read/json?start=0&num=200' %args
     req = urllib.request.Request(url)
@@ -48,7 +47,7 @@ def tumblr_id(*args):
     threads = []
     for i in args:#threading多线程下载
         t = Thread(target=download,
-                             args=(i))
+                             args=(i,))
         threads.append(t)
     for h in range(len(args)):
         threads[h].start()
